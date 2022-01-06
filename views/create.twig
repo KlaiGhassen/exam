@@ -1,0 +1,30 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+  <fieldset style="width: 33%; display: block; margin: auto">
+    <legend>Create User</legend>
+    <form action="/users/create" method="post" enctype="multipart/form-data">
+      <div style="margin-bottom: 15px">
+        Nom
+        <label for="Nom" style="width: 100%; margin-bottom: 15px">
+          <input type="text" placeholder="Nom" name="Nom" id="Nom"/>
+        </label>
+      </div>
+      <div style="margin-bottom: 15px">
+        <label for="prenom" style="width: 100%; margin-bottom: 15px">
+          Prenom
+          <input type="text" placeholder="prenom" name="prenom" id="prenom"/>
+        </label>
+      </div>
+      <div style="margin-bottom: 15px">
+        <label for="Email" style="width: 100%; margin-bottom: 15px">
+          Email
+          <input type="text" placeholder="email" name="email" id="Email"/>
+        </label>
+     
+      </div>
+      <input type="submit" value="Create" style="float: right"/>
+    </form>
+  </fieldset>
+{% endblock %}
