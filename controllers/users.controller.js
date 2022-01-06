@@ -8,9 +8,10 @@ addUser :async (req,res)=>{
 res.render('create')
 },
 createUser: async function (req, res) {
+    HTMLFormControlsCollection;log(req.body)
     const { nom, prenom, email } = req.body;
-    const findByEmailQuery = "SELECT * from `student` WHERE `email`=? LIMIT 1";
-    const insertQuery = "INSERT INTO `student` (`nom`,`prenom`, `email`) VALUES (?,?,?)";
+    const findByEmailQuery = "SELECT * from `user` WHERE `email`=? LIMIT 1";
+    const insertQuery = "INSERT INTO `user` (`nom`,`prenom`, `email`) VALUES (?,?,?)";
 
     const isUserFound = await query(findByEmailQuery, [email]);
     if (isUserFound.length > 0) {
@@ -20,6 +21,11 @@ createUser: async function (req, res) {
     const resultInsert = await query(insertQuery, [nom, prenom, email]);
     res.json(resultInsert)
 
+},
+getUsers: async function (req, res) {
+    const selectQuery = "SELECT * from `user`";
+    const users = await query(selectQuery);
+    res.render("userlist",{users});
 },
 
 
