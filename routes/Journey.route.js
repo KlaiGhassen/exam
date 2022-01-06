@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const productController = require("../controllers/Journey.controller");
+const JournayController = require("../controllers/Journey.controller");
 
 const multer = require("multer");
 const path = require("path");
@@ -17,16 +17,17 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 /**
- * @Path /products
+ * @Path /Journays
  */
 router.route("/")
-    .post(upload.single("image"), productController.createProduct)
-    .get(productController.getUserProducts);
+    .post(upload.single("image"), JournayController.createJournay)
+    .get(JournayController.getALLJournays);
 
-router.get("/all", productController.getAllProducts);
-router.get("/:id", productController.getProductById);
-router.get("/delete/:id", productController.deleteProduct);
+router.get("/all", JournayController.getJournaysByUser);
+router.get("/:id", JournayController.getJournayById);
+router.get("/delete/:id", JournayController.deleteJournay);
 
+router.route("/reservation")
 
 
 module.exports = router;

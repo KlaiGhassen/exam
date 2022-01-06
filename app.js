@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/products', produtsRouter);
+app.use('/journey', produtsRouter);
 app.use('/uploads', picture);
 
 

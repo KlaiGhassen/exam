@@ -3,9 +3,9 @@ const mongoose = require("mongoose")
 
 const journeySchema = mongoose.Schema({
     from: String,
-    to: Number,
-    time: Number,
-    maxPlace: String,
+    to: String,
+    time: Date,
+    maxPlace: Number,
     company: String,
     imageUrl:String
 });

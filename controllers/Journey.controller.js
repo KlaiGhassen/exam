@@ -1,64 +1,39 @@
-const { Product } = require("../models/Journey.model");
-
-const users = [
-    "213ESP0190",
-    "213ESP0191",
-    "213ESP0192",
-    "213ESP0193",
-    "213ESP0194"
-];
+const { Journay } = require("../models/Journey.model");
 
 module.exports = {
-    createProduct: async (req, res) => {
-        const { id } = req.headers;
-        if (!id) {
-            return res.status(401).end();
-        }
-
-        if (users.indexOf(id) == -1) {
-            return res.status(404).end();
-        }
-
-
-        const product = new Product({
-            ...req.body
-        });
-
-        if (req.file) {
-            product.image = req.file.path;
-        }
-        product.user = id;
-        await product.save();
-        res.json(product)
-
-
-    },
-    getUserProducts: async (req, res) => {
-        const { id } = req.headers;
-        if (!id) {
-            return res.status(401).end();
-        }
-
-        if (users.indexOf(id) == -1) {
-            return res.status(404).end();
-        }
-
-        const products = await Product.find({ user: id });
-        res.json(products);
-    },
-    getAllProducts: async (req, res) => {
-        const products = await Product.find();
-        res.render("list", { products });
-    },
-    getProductById: async (req, res) => {
-        const { id } = req.params;
-        const product = await Product.findById(id);
-        product.image = product.image.replace("uploads/", "");
-        res.render("details", { product });
-    },
-    deleteProduct: async (req, res) => {
-        const { id } = req.params;
-        await Product.remove({ _id: id });
-        res.redirect("/products/all");
+  createJournay: async (req, res) => {
+    const { id } = req.headers;
+    if (!id) {
+      return res.status(401).end();
     }
-}
+
+    const journay = new Journay({
+      ...req.body,
+    });
+
+    if (req.file) {
+      journay.imageUrl = req.file.path;
+    }
+    await journay.save();
+    res.json(journay);
+  },
+  getALLJournays: async (req, res) => {
+    const journays = await Journay.find();
+    res.json(journays);
+  },
+  getJournaysByUser: async (req, res) => {
+    const journays = await Journay.find();
+    res.render("list", { journays });
+  },
+  getJournayById: async (req, res) => {
+    const { id } = req.params;
+    const journay = await Journay.findById(id);
+    journay.image = journay.image.replace("uploads/", "");
+    res.render("details", { journay });
+  },
+  deleteJournay: async (req, res) => {
+    const { id } = req.params;
+    await Journay.remove({ _id: id });
+    res.redirect("/journays/all");
+  },
+};
